@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OffPay.iml" filepath="$PROJECT_DIR$/OffPay.iml" />
+      <module fileurl="file://D:\androidstud\Offpay1\OffPay\OffPay.iml" filepath="D:\androidstud\Offpay1\OffPay\OffPay.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\androidstud\Offpay1\OffPay\app\app.iml" filepath="D:\androidstud\Offpay1\OffPay\app\app.iml" />
     </modules>
   </component>
 </project>
