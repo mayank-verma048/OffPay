@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/transfer_money"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/transfer" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Transfer"
+        android:layout_marginLeft="9dp"
+        android:id="@+id/tv_transfer"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:layout_below="@+id/transfer_money"
+        android:layout_alignStart="@+id/transfer_money"/>
+
+    <ImageView
+        android:id="@+id/recieve_money"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerInside"
+        android:layout_marginTop="300dp"
+        android:src="@drawable/recieve" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recieve"
+        android:layout_marginLeft="9dp"
+        android:id="@+id/tv_recieve"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:layout_below="@+id/recieve_money"
+        android:layout_alignStart="@+id/transfer_money"/>
+</RelativeLayout>
