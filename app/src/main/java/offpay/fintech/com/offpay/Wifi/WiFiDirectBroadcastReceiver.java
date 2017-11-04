@@ -19,6 +19,8 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
     private WifiP2pManager.Channel mChannel;
     private WifiActivity mActivity;
 
+    WifiP2pManager.PeerListListener myPeerListListener;
+
     public WiFiDirectBroadcastReceiver(WifiP2pManager manager, WifiP2pManager.Channel channel,
                                        WifiActivity activity) {
         super();
@@ -36,13 +38,17 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
             int state = intent.getIntExtra(WifiP2pManager.EXTRA_WIFI_STATE, -1);
             if (state == WifiP2pManager.WIFI_P2P_STATE_ENABLED) {
                 // Wifi P2P is enabled
-                Log.i("Help","Enabled");
+                WifiActivity wifi = new WifiActivity();
+                Log.i(wifi.TAG,"Enabled");
             } else {
                 // Wi-Fi P2P is not enabled
                 Log.i("Help","Disabled");
             }
         } else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
             // Call WifiP2pManager.requestPeers() to get a list of current peers
+            if (mManager != null) {
+                mManager.requestPeers(mChannel, myPeerListListener);
+            }
 
         } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
             // Respond to new connection or disconnections

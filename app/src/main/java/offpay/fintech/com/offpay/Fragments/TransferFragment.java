@@ -1,6 +1,7 @@
 package offpay.fintech.com.offpay.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 import java.util.List;
 
 import offpay.fintech.com.offpay.R;
+import offpay.fintech.com.offpay.WifiActivity;
+import offpay.fintech.com.offpay.wifidirect.WiFiDirectActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,7 +87,7 @@ public class TransferFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.transfer_money:
-                Toast.makeText(getActivity(),"Transfer Selected",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(),WiFiDirectActivity.class));
                 break;
         }
     }
