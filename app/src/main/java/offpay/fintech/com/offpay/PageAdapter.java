@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import offpay.fintech.com.offpay.Fragments.ProfileFragment;
 import offpay.fintech.com.offpay.Fragments.TransferFragment;
 
 /**
@@ -26,7 +27,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
                 TransferFragment tab1 = new TransferFragment();
                 return tab1;
             case 1:
-                TransferFragment tab2 = new TransferFragment();
+                ProfileFragment tab2 = new ProfileFragment();
                 return tab2;
             case 2:
                 TransferFragment tab3 = new TransferFragment();
