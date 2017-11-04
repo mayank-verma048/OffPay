@@ -2,13 +2,18 @@ package offpay.fintech.com.offpay.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import offpay.fintech.com.offpay.R;
 
@@ -21,8 +26,6 @@ import offpay.fintech.com.offpay.R;
  * create an instance of this fragment.
  */
 public class TransferFragment extends Fragment implements View.OnClickListener{
-
-
     public TransferFragment() {
         // Required empty public constructor
     }
@@ -45,6 +48,34 @@ public class TransferFragment extends Fragment implements View.OnClickListener{
         ImageView transfer = (ImageView)view.findViewById(R.id.transfer_money);
         ImageView recieve = (ImageView)view.findViewById(R.id.recieve_money);
         transfer.setOnClickListener(this);
+
+        String networkSSID = "test";
+        String networkPass = "pass";
+
+        WifiConfiguration conf = new WifiConfiguration();
+        conf.SSID = "\"" + networkSSID + "\"";
+        conf.wepKeys[0] = "\"" + networkPass + "\"";
+        conf.wepTxKeyIndex = 0;
+        conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+        conf.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
+        conf.preSharedKey = "\""+ networkPass +"\"";
+        conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+
+        WifiManager wifiManager = (WifiManager)getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        wifiManager.addNetwork(conf);
+
+        List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
+        for( WifiConfiguration i : list ) {
+            if(i.SSID != null && i.SSID.equals("\"" + networkSSID + "\"")) {
+                Log.i("Hello",networkSSID);
+                wifiManager.disconnect();
+                wifiManager.enableNetwork(i.networkId, true);
+                wifiManager.reconnect();
+
+                break;
+            }
+        }
+
         return view;
     }
 
