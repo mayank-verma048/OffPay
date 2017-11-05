@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/OffPay.iml" filepath="$PROJECT_DIR$/OffPay.iml" />
+      <module fileurl="file://C:\Users\ASUS\StudioProjects\OffPay\OffPay.iml" filepath="C:\Users\ASUS\StudioProjects\OffPay\OffPay.iml" />
       <module fileurl="file://C:\Users\Tanupriya\Desktop\OffPay\OffPay\OffPay.iml" filepath="C:\Users\Tanupriya\Desktop\OffPay\OffPay\OffPay.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\ASUS\StudioProjects\OffPay\app\app.iml" filepath="C:\Users\ASUS\StudioProjects\OffPay\app\app.iml" />
       <module fileurl="file://C:\Users\Tanupriya\Desktop\OffPay\OffPay\app\app.iml" filepath="C:\Users\Tanupriya\Desktop\OffPay\OffPay\app\app.iml" />
     </modules>
   </component>
