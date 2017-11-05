@@ -22,7 +22,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -31,7 +31,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Fragments.wifidirect.WiFiDirectActivity" />
         <activity android:name=".RecieveWifi.WiFiDirectActivity"/>
+        <activity android:name=".LoginActivity"
+            android:theme="@style/AppTheme">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <service
             android:name=".Fragments.wifidirect.FileTransferService"
             android:enabled="true" />

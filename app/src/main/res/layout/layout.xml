@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
     android:orientation="vertical"
-    android:layout_marginTop="50dp">
+    android:background="@drawable/bkgtwo">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -18,14 +17,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="ACCOUNT NUMBER:"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#FFD032"/>
 
         <TextView
+            android:id="@+id/accno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="0"
-            android:textSize="28sp" />
+            android:text="AkshajJain1728"
+            android:textSize="28sp"
+            android:textColor="#ffffff"/>
 
     </LinearLayout>
 
@@ -41,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="ACCOUNT BALANCE:"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#FFD032"/>
 
         <TextView
             android:id="@+id/accbalance"
@@ -49,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="0"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            android:textColor="#ffffff"/>
 
     </LinearLayout>
 
@@ -64,14 +68,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="OFFLINE CREDITS:"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#FFD032"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="0"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            android:textColor="#ffffff"/>
 
     </LinearLayout>
 </LinearLayout>

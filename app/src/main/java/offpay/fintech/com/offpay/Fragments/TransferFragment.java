@@ -2,11 +2,17 @@ package offpay.fintech.com.offpay.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import offpay.fintech.com.offpay.R;
 //import offpay.fintech.com.offpay.Fragments.wifidirect.WifiDirectActivity;
@@ -80,6 +86,23 @@ public class TransferFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.transfer_money:
+                try {
+                    File root = new File(Environment.getExternalStorageDirectory()+ "/"
+                            + getContext().getPackageName() , "Notes");
+                    if (!root.exists()) {
+                        root.mkdirs();
+                    }
+                    for(int i = 0;i<40;i++) {
+                        File gpxfile = new File(root, "cert"+i+".txt");
+                        FileWriter writer = new FileWriter(gpxfile);
+                        writer.append("Hellomaga");
+                        writer.flush();
+                        writer.close();
+                        Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 startActivity(new Intent(getActivity(),WiFiDirectActivity.class));
                 break;
 
