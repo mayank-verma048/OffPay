@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import offpay.fintech.com.offpay.R;
+import offpay.fintech.com.offpay.models.ModelClass;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +32,7 @@ import offpay.fintech.com.offpay.R;
  */
 public class ProfileFragment extends Fragment {
 
+    DatabaseReference ref;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -42,12 +51,29 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout, container, false);
+
+        final TextView accbalance = (TextView)view.findViewById(R.id.accbalance);
+        ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("users").child("akshaj1998").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ModelClass mc = dataSnapshot.getValue(ModelClass.class);
+                accbalance.setText(mc.getBankmoney().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         return view;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

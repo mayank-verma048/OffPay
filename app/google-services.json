@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "268795185078",
+    "firebase_url": "https://offpay-8ce13.firebaseio.com",
+    "project_id": "offpay-8ce13",
+    "storage_bucket": "offpay-8ce13.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268795185078:android:be6aacffde69da0f",
+        "android_client_info": {
+          "package_name": "offpay.fintech.com.offpay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268795185078-d4co94k87rnkgvc9hr9eqphq95nviqed.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD7klYxNP6QGdJzTghahpoqfBhCrh86MI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
