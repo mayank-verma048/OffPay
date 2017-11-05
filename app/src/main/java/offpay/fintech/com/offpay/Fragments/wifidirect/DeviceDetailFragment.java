@@ -23,6 +23,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.PublicKey;
+import java.security.cert.X509Certificate;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -44,8 +46,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.apache.xml.security.exceptions.XMLSecurityException;
+import org.apache.xml.security.keys.KeyInfo;
+import org.apache.xml.security.signature.XMLSignature;
+import org.apache.xml.security.signature.XMLSignatureException;
+import org.apache.xml.security.utils.Constants;
+
+
+
+import org.apache.xml.security.utils.XPathAPI;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.TransformerException;
+
 import offpay.fintech.com.offpay.Fragments.wifidirect.DeviceListFragment.DeviceActionListener;
 import offpay.fintech.com.offpay.R;
+
+import static org.apache.xml.security.utils.XMLUtils.createDSctx;
+
 
 /**
  * A fragment that manages a particular peer and allows interaction with device
@@ -140,11 +163,13 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 		Log.d(WiFiDirectActivity.TAG, "Intent----------- " + uri);
 		Intent serviceIntent = new Intent(getActivity(), FileTransferService.class);
 		serviceIntent.setAction(FileTransferService.ACTION_SEND_FILE);
-		serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH, uri.toString());
+
+		//Diagnose hardcoded XML File path for now
+		serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH, Environment.getExternalStorageDirectory()+ "/selfsigned.xml");
 
 		if(localIP.equals(IP_SERVER)){
 			Log.d(FileTransferService.EXTRAS_ADDRESS,clientIP==null?"NULL":clientIP);
-			serviceIntent.putExtra(FileTransferService.EXTRAS_ADDRESS, "192.168.49.12");
+			serviceIntent.putExtra(FileTransferService.EXTRAS_ADDRESS, "192.168.49.223");
 		}else{
 			Log.d(FileTransferService.EXTRAS_ADDRESS,clientIP);
 			serviceIntent.putExtra(FileTransferService.EXTRAS_ADDRESS, IP_SERVER);
@@ -240,9 +265,9 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 				Log.d(WiFiDirectActivity.TAG, "Server: Socket opened");
 				Socket client = serverSocket.accept();
 				Log.d(WiFiDirectActivity.TAG, "Server: connection done");
-				final File f = new File(Environment.getExternalStorageDirectory() + "/"
-						+ context.getPackageName() + "/wifip2pshared-" + System.currentTimeMillis()
-						+ ".jpg");
+
+				//Diagnose XML hardcoded path for now.
+				final File f = new File(Environment.getExternalStorageDirectory() + "/selfsigned.xml");
 
 				File dirs = new File(f.getParent());
 				if (!dirs.exists())
@@ -251,7 +276,15 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 
 				Log.d(WiFiDirectActivity.TAG, "server: copying files " + f.toString());
 				InputStream inputstream = client.getInputStream();
+
+
+
 				copyFile(inputstream, new FileOutputStream(f));
+
+
+
+				Log.d("SIGNATURE",""+verifySignature(context.getContentResolver().openInputStream(Uri.parse("file:///storage/emulated/0/selfsigned.xml"))));
+
 				serverSocket.close();
 				server_running = false;
 				return f.getAbsolutePath();
@@ -260,6 +293,61 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 				return null;
 			}
 		}
+
+
+			boolean verifySignature(InputStream inputStream) {
+				boolean valid = false;
+				try {
+					// parse the XML
+					InputStream in = inputStream;//obtainInputStreamToXMLSomehow();
+					DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+					f.setNamespaceAware(true);
+					Document doc = f.newDocumentBuilder().parse(in);
+					in.close();
+
+					// verify signature
+					NodeList nodes = doc.getElementsByTagNameNS(Constants.SignatureSpecNS, "Signature");
+					if (nodes.getLength() == 0) {
+						throw new Exception("Signature NOT found!");
+					}
+
+					Element sigElement = (Element) nodes.item(0);
+					XMLSignature signature = new XMLSignature(sigElement, "");
+
+					KeyInfo ki = signature.getKeyInfo();
+					if (ki == null) {
+						throw new Exception("Did not find KeyInfo");
+					}
+
+					X509Certificate cert = signature.getKeyInfo().getX509Certificate();
+					if (cert == null) {
+						PublicKey pk = signature.getKeyInfo().getPublicKey();
+						if (pk == null) {
+							throw new Exception("Did not find Certificate or Public Key");
+						}
+						valid = signature.checkSignatureValue(pk);
+					}
+					else {
+						valid = signature.checkSignatureValue(cert);
+					}
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				return valid;
+			}
+
+			// This is important!
+			static {
+				org.apache.xml.security.Init.init();
+			}
+
+
+
+
+
+
 
 		/*
 		 * (non-Javadoc)
