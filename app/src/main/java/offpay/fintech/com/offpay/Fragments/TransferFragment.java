@@ -1,20 +1,12 @@
 package offpay.fintech.com.offpay.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import java.util.List;
 
 import offpay.fintech.com.offpay.R;
 //import offpay.fintech.com.offpay.Fragments.wifidirect.WifiDirectActivity;
@@ -50,6 +42,7 @@ public class TransferFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.main_fragment_page, container, false);
         ImageView transfer = (ImageView)view.findViewById(R.id.transfer_money);
         ImageView recieve = (ImageView)view.findViewById(R.id.recieve_money);
+        recieve.setOnClickListener(this);
         transfer.setOnClickListener(this);
 
         /*String networkSSID = "test";
@@ -89,6 +82,9 @@ public class TransferFragment extends Fragment implements View.OnClickListener{
             case R.id.transfer_money:
                 startActivity(new Intent(getActivity(),WiFiDirectActivity.class));
                 break;
+
+            case R.id.recieve_money:
+                startActivity(new Intent(getActivity(), offpay.fintech.com.offpay.RecieveWifi.WiFiDirectActivity.class));
         }
     }
 }
