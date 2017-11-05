@@ -32,6 +32,10 @@
                 android:text="@string/get_file_button"
                 android:visibility="gone" />
         </LinearLayout>
+        <EditText
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/etmoney" />
         <TextView
             android:id="@+id/device_address"
             android:layout_width="match_parent"

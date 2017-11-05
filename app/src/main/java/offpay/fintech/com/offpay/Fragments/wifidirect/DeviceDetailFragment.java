@@ -18,6 +18,7 @@ package offpay.fintech.com.offpay.Fragments.wifidirect;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -42,6 +43,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import offpay.fintech.com.offpay.Fragments.wifidirect.DeviceListFragment.DeviceActionListener;
@@ -115,9 +117,27 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 					public void onClick(View v) {
 						// Allow user to pick an image from Gallery or other
 						// registered apps
-						Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+						/*Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 						intent.setType("image/*");
-						startActivityForResult(intent, CHOOSE_FILE_RESULT_CODE);
+						startActivityForResult(intent, CHOOSE_FILE_RESULT_CODE);*/
+						EditText et = mContentView.findViewById(R.id.etmoney);
+						String sp = et.getText().toString();
+						try {
+						File root = new File(Environment.getExternalStorageDirectory()+ "/"
+								+ getActivity().getPackageName() , "Notes");
+						if (!root.exists()) {
+							root.mkdirs();
+						}
+
+						File gpxfile = new File(root, "cert.txt");
+						FileWriter writer = new FileWriter(gpxfile);
+						writer.append(sp);
+						writer.flush();
+						writer.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+
 					}
 				});
 

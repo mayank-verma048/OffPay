@@ -86,7 +86,7 @@ public class TransferFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.transfer_money:
-                try {
+                /*try {
                     File root = new File(Environment.getExternalStorageDirectory()+ "/"
                             + getContext().getPackageName() , "Notes");
                     if (!root.exists()) {
@@ -102,7 +102,7 @@ public class TransferFragment extends Fragment implements View.OnClickListener{
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
                 startActivity(new Intent(getActivity(),WiFiDirectActivity.class));
                 break;
 
