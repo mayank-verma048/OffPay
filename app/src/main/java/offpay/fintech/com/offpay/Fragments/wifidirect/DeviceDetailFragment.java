@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package offpay.fintech.com.offpay.wifidirect;
+package offpay.fintech.com.offpay.Fragments.wifidirect;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,14 +37,15 @@ import android.net.wifi.p2p.WifiP2pManager.ConnectionInfoListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import offpay.fintech.com.offpay.Fragments.wifidirect.DeviceListFragment.DeviceActionListener;
 import offpay.fintech.com.offpay.R;
-import offpay.fintech.com.offpay.wifidirect.DeviceListFragment.DeviceActionListener;
 
 /**
  * A fragment that manages a particular peer and allows interaction with device
@@ -78,6 +79,8 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 				WifiP2pConfig config = new WifiP2pConfig();
 				config.deviceAddress = device.deviceAddress;
 				config.wps.setup = WpsInfo.PBC;
+				StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+				StrictMode.setVmPolicy(builder.build());
 				if (progressDialog != null && progressDialog.isShowing()) {
 					progressDialog.dismiss();
 				}
@@ -140,8 +143,10 @@ public class DeviceDetailFragment extends Fragment implements ConnectionInfoList
 		serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH, uri.toString());
 
 		if(localIP.equals(IP_SERVER)){
-			serviceIntent.putExtra(FileTransferService.EXTRAS_ADDRESS, clientIP);
+			Log.d(FileTransferService.EXTRAS_ADDRESS,clientIP==null?"NULL":clientIP);
+			serviceIntent.putExtra(FileTransferService.EXTRAS_ADDRESS, "192.168.49.12");
 		}else{
+			Log.d(FileTransferService.EXTRAS_ADDRESS,clientIP);
 			serviceIntent.putExtra(FileTransferService.EXTRAS_ADDRESS, IP_SERVER);
 		}
 

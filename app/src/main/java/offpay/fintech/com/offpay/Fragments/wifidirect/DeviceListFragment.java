@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package offpay.fintech.com.offpay.wifidirect;
+package offpay.fintech.com.offpay.Fragments.wifidirect;
 
 import android.app.ListFragment;
 import android.app.ProgressDialog;

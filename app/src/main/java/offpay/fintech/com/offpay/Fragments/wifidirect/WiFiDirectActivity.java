@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package offpay.fintech.com.offpay.wifidirect;
+package offpay.fintech.com.offpay.Fragments.wifidirect;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -28,9 +28,8 @@ import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.net.wifi.p2p.WifiP2pManager.ChannelListener;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,8 +37,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import offpay.fintech.com.offpay.Fragments.wifidirect.DeviceListFragment.DeviceActionListener;
 import offpay.fintech.com.offpay.R;
-import offpay.fintech.com.offpay.wifidirect.DeviceListFragment.DeviceActionListener;
 
 /**
  * An activity that uses WiFi Direct APIs to discover and connect with available
@@ -48,7 +47,7 @@ import offpay.fintech.com.offpay.wifidirect.DeviceListFragment.DeviceActionListe
  * The application should also register a BroadcastReceiver for notification of
  * WiFi state related events.
  */
-public class WiFiDirectActivity extends AppCompatActivity implements ChannelListener, DeviceListFragment.DeviceActionListener {
+public class WiFiDirectActivity extends Activity implements ChannelListener, DeviceActionListener {
 
     public static final String TAG = "wifidirectdemo";
     private WifiP2pManager manager;
@@ -73,6 +72,8 @@ public class WiFiDirectActivity extends AppCompatActivity implements ChannelList
 
         // add necessary intent values to be matched.
 
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
 
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
         intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);

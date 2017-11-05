@@ -1,6 +1,6 @@
 // Copyright 2011 Google Inc. All Rights Reserved.
 
-package offpay.fintech.com.offpay.wifidirect;
+package offpay.fintech.com.offpay.Fragments.wifidirect;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

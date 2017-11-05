@@ -1,3 +1,4 @@
+/*
 package offpay.fintech.com.offpay;
 
 import android.content.BroadcastReceiver;
@@ -14,7 +15,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import offpay.fintech.com.offpay.Wifi.WiFiDirectBroadcastReceiver;
+import offpay.fintech.com.offpay.Fragments.wifidirect.WiFiDirectBroadcastReceiver;
 
 public class WifiActivity extends AppCompatActivity implements WifiP2pManager.PeerListListener {
 
@@ -57,13 +58,17 @@ public class WifiActivity extends AppCompatActivity implements WifiP2pManager.Pe
 
     }
 
-    /* register the broadcast receiver with the intent values to be matched */
+    */
+/* register the broadcast receiver with the intent values to be matched *//*
+
     @Override
     protected void onResume() {
         super.onResume();
         registerReceiver(mReceiver, mIntentFilter);
     }
-    /* unregister the broadcast receiver */
+    */
+/* unregister the broadcast receiver *//*
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -85,3 +90,4 @@ public class WifiActivity extends AppCompatActivity implements WifiP2pManager.Pe
         }
     }
 }
+*/

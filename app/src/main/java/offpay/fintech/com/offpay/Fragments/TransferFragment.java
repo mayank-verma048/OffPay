@@ -17,8 +17,8 @@ import android.widget.Toast;
 import java.util.List;
 
 import offpay.fintech.com.offpay.R;
-import offpay.fintech.com.offpay.WifiActivity;
-import offpay.fintech.com.offpay.wifidirect.WiFiDirectActivity;
+//import offpay.fintech.com.offpay.Fragments.wifidirect.WifiDirectActivity;
+import offpay.fintech.com.offpay.Fragments.wifidirect.WiFiDirectActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,7 +52,7 @@ public class TransferFragment extends Fragment implements View.OnClickListener{
         ImageView recieve = (ImageView)view.findViewById(R.id.recieve_money);
         transfer.setOnClickListener(this);
 
-        String networkSSID = "test";
+        /*String networkSSID = "test";
         String networkPass = "pass";
 
         WifiConfiguration conf = new WifiConfiguration();
@@ -77,7 +77,7 @@ public class TransferFragment extends Fragment implements View.OnClickListener{
 
                 break;
             }
-        }
+        }*/
 
         return view;
     }

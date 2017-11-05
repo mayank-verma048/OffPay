@@ -1,4 +1,4 @@
-package offpay.fintech.com.offpay.wifidirect;
+package offpay.fintech.com.offpay.Fragments.wifidirect;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,7 +13,7 @@ import android.util.Log;
 
 public class Utils {
 
-	private final static String p2pInt = "p2p-p2p0";
+	private final static String p2pInt = "p2p";
 
 	public static String getIPFromMac(String MAC) {
 		/*
@@ -61,23 +61,24 @@ public class Utils {
 		 * 
 		 * */
 		try {
-			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
 				NetworkInterface intf = en.nextElement();
-				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
 					InetAddress inetAddress = enumIpAddr.nextElement();
 
 					String iface = intf.getName();
-					if(iface.matches(".*" +p2pInt+ ".*")){
+					Log.d("Interface",iface);
+					if (iface.matches(".*" + p2pInt + ".*")) {
 						if (inetAddress instanceof Inet4Address) { // fix for Galaxy Nexus. IPv4 is easy to use :-)
 							return getDottedDecimalIP(inetAddress.getAddress());
-						}
+						} else Log.e("DEVICE","Null return 2");
+					} else {
+						Log.e("DEVICE","Null return 3");
 					}
 				}
 			}
-		} catch (SocketException ex) {
-			Log.e("AndroidNetworkAddressFactory", "getLocalIPAddress()", ex);
-		} catch (NullPointerException ex) {
-			Log.e("AndroidNetworkAddressFactory", "getLocalIPAddress()", ex);
+		} catch (Exception ex){
+			ex.printStackTrace();
 		}
 		return null;
 	}
